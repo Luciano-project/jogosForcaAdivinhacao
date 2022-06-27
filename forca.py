@@ -12,19 +12,22 @@ def pede_chute():
     chute = chute.strip().upper()
     return chute
 
+def marca_chute_correto(chute,palavra_secreta,letras_acertadas):
+    index = 0
+    for letra in palavra_secreta:
+        if(chute == letra):
+            letras_acertadas[index] = letra 	
+        index = index + 1
+    
+
 def jogando(palavra_secreta,letras_acertadas):
     enforcou,acertou=False,False
     erros=0
+    
     while(not enforcou and not acertou):
-        
-        chute = pede_chute
-        
+        chute = pede_chute()
         if chute in palavra_secreta:
-            index = 0
-            for letra in palavra_secreta:
-                if(chute == letra):
-                    letras_acertadas[index] = letra 	
-                index = index + 1
+            marca_chute_correto(chute,palavra_secreta,letras_acertadas)
         else:
             erros += 1
             print("Você errou, tente novamente!\nTentativas testantes {}".format(6-erros))
