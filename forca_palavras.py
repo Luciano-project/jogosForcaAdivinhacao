@@ -1,16 +1,27 @@
 import os
+
+        
+        
 class Arquivo:
     def __init__(self):
         pass
-
-    def adicionar(self,fruta):
-        with open("palavras.txt", "a") as palavras:
-            palavras.write("{}\n".format(fruta))
+    
+    def adicionar(self,palavra_a_ser_adicionada):
+        path="palavras/frutas.txt"
+        with open(path, "a") as palavras:
+            palavras.write("{}\n".format(palavra_a_ser_adicionada))
             print("Palavra adicionada com sucesso! ")
             return self.menu()
 
+    def menu_cabecalho(self):
+        pass
+        
+    
+    def verificar_palavra_existente(self):
+        pass
+        
     def menu(self):
-        print("*****Lista de palavras*****")
+        print("*****Lista de palavras da forca*****")
         print("(1) Adicionar (2) Listar palavras (0) Voltar")
         acao=int(input("Qual opcao? "))
         palavras = self.palavra()
@@ -45,7 +56,8 @@ class Arquivo:
             print(item)
     	    
     def palavra(self):
-        with open("palavras.txt", "r") as palavras:
+        path="palavras/frutas.txt"
+        with open(path, "r") as palavras:
             lista=palavras.read().upper()
             lista = lista.split() #como alternativa ao .split() podemos usar o . strip()
             return lista

@@ -2,6 +2,7 @@ from random import randrange
 from forca_palavras import Arquivo
 import os
 os.system("clear")
+
 def cabecalho():
     print("*********************************")
     print("***Bem vindo ao jogo da Forca!***")
@@ -40,12 +41,11 @@ def jogando(palavra_secreta,letras_acertadas):
 
 def jogar():
 
-    cabecalho()    
-    print("Jogando forca")
+    cabecalho()
     
-    frutas = Arquivo().palavra()
-    
-    palavra_secreta=frutas[randrange(len(frutas))]
+    lista_de_palavras = Arquivo().palavra()
+ 
+    palavra_secreta=lista_de_palavras[randrange(len(lista_de_palavras))]
     letras_acertadas = ["_" for letra in palavra_secreta]
     print(letras_acertadas)
     

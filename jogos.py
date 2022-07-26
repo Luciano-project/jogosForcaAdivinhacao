@@ -2,28 +2,37 @@ import forca
 from forca_palavras import Arquivo
 import adivinhacao
 
-def escolhe_jogo():
+
+def cabecalho_inicio():
     print("*********************************")
     print("*******Escolha o seu jogo!*******")
     print("*********************************")
 
+def printar_escolhe_jogo():
     print("(1) Forca (2) Adivinhação")
 
+def escolhe_jogo():
+    cabecalho_inicio()
+    printar_escolhe_jogo()
     jogo = int(input("Qual jogo? "))
+    return jogo
+    
+def menu_jogo():
+    jogo=escolhe_jogo()
     while True:
         if(jogo == 0):
-            print("Adicionar palavras a forca")
-            if Arquivo().menu()==0: return escolhe_jogo()
+            Arquivo().menu()
             
         elif(jogo == 1):
-            print("Jogando forca")
             forca.jogar()
+   
         elif(jogo == 2):
-            print("Jogando adivinhação")
             adivinhacao.jogar()
-        acao=input("\n\nJogar novamente? (s/n)\n")
-        if acao=="s":
-            return escolhe_jogo()
-        else: break
+
+        else:
+            print("Digite uma opção válida!")
+
+        break        
+
 if(__name__ == "__main__"):
-    escolhe_jogo()
+    menu_jogo()
