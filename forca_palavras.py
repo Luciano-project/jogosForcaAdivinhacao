@@ -1,7 +1,8 @@
 import os
+path="palavras/"
+for c in os.listdir(path):
+    print(c)
 
-        
-        
 class Arquivo:
     def __init__(self):
         pass

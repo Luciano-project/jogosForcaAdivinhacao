@@ -20,24 +20,28 @@ def marca_chute_correto(chute,palavra_secreta,letras_acertadas):
             letras_acertadas[index] = letra 	
         index = index + 1
     
-
 def jogando(palavra_secreta,letras_acertadas):
     enforcou,acertou=False,False
     erros=0
     
     while(not enforcou and not acertou):
         chute = pede_chute()
-        if chute in palavra_secreta:
-            marca_chute_correto(chute,palavra_secreta,letras_acertadas)
-        else:
-            erros += 1
-            desenha_forca(erros)
-	
+        erros=resultado_do_chute(erros,chute,palavra_secreta,letras_acertadas)
         enforcou = erros == 7
         acertou = "_" not in letras_acertadas
         print("\n{}".format(letras_acertadas))
     return acertou
 
+def resultado_do_chute(erros,chute,palavra_secreta,letras_acertadas):
+    if chute in palavra_secreta:
+        marca_chute_correto(chute,palavra_secreta,letras_acertadas)
+        return 0
+        
+    else:
+        erros+=1
+        desenha_forca(erros)
+
+        return 1
 
 def jogar():
 
