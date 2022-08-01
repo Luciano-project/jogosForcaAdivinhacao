@@ -1,72 +1,106 @@
 import os
+
+class PalavraJogo:
+    def __init__(self):
+        self.palavra_sorteada=''
+        self.path=Arquivo().path
+     
+    def retorna_a_lista(self):
+        print("\nEscolha um tema:")
+        Arquivo().imprime_listas_palavras()
+        destino=int(input())
+        self.path+=Arquivo().lista_de_arquivos[destino]
+        
+        with open(self.path, "r") as palavras:
+            lista=palavras.read().upper()
+            lista_de_palavras = lista.split() #como alternativa ao .split() podemos usar o . strip()
+            return lista_de_palavras
+         
     
-#Desfazer a classe Arquivo e construir uma nova classe para manipulação das palavras
 class Arquivo:
-    def __init__(self,listas=[]):
-        self.listas=listas
+    def __init__(self):
+        self.lista_de_palavras=[]
+        self.lista_de_arquivos=['frutas.txt','paises.txt']
+        self.path="palavras/"
+        self.path_padrao="palavras/"
+        self._palavra_secreta=''
     
-    def adicionar(self,palavra_a_ser_adicionada):
-        path="palavras/frutas.txt"
-        with open(path, "a") as palavras:
+    def adiciona_palavra_forca(self,palavra_a_ser_adicionada):
+        with open(self.path, "a") as palavras:
             palavras.write("{}\n".format(palavra_a_ser_adicionada))
             print("Palavra adicionada com sucesso! ")
-            return self.menu()
     
-    def adicionar_listas_forca(self):
-        path="palavras/"
-        for c in os.listdir(path):
-            self.listas.append(c)
+    #def adiciona_listas_forca(self): 
+    #    for c in os.listdir(self.path_padrao):
+    #        self.lista_de_arquivos.append(c)
         
-    def menu_cabecalho(self):
-        pass
+    def imprime_cabecalho_menu(self):
+        self.limpa_terminal()
+        print("*****Lista de palavras da forca*****")
         
-    
-    def verificar_palavra_existente(self):
-        pass
+    def imprime_opcoes_menu(self):    
+        print("(1) Adicionar (2) Listar palavras (0) Voltar")
+                      
+    def verifica_palavra_existente(self,palavra_para_adicionar):
+        existe=False
+        for item in self.lista_de_palavras: 
+            if item==palavra_para_adicionar:
+                existe = True
+                break
+                   
+        if existe:
+            print("Já existe essa opcao!")
+               
+        elif not existe:
+            self.adiciona_palavra_forca(palavra_para_adicionar)
+              
+    def imprime_listas_palavras(self):
+        print('(0) frutas (1) paises')
+            
+            
+    def escolhe_lista_palavras(self):
+        caminho=input("selecione a lista: ")
+        self.path+=self.lista_de_arquivos[int(caminho)]
+        
+    def carrega_dados(self):
+        self.imprime_listas_palavras()
+     #   self.adiciona_listas_forca()
+        self.escolhe_lista_palavras()
+        
+        
         
     def menu(self):
-        print("*****Lista de palavras da forca*****")
-        print("(1) Adicionar (2) Listar palavras (0) Voltar")
-        acao=int(input("Qual opcao? "))
-        palavras = self.palavra()
-        existe = False
-        
-        if acao == 1:
-            fruta = input("Qual fruta adicionar? ").upper()
-            for item in palavras: 
-                if item==fruta:
-                    existe = True
-                    break
-                    
-            if existe:
-                print("Já existe essa opcao!")
-                return self.menu()
+        self.imprime_cabecalho_menu()
+        self.carrega_dados()
+        self.imprime_cabecalho_menu()
+        palavras = self.palavra()        
+        while True:
+            self.imprime_opcoes_menu()
+            acao=int(input("Qual opcao? "))
+            if acao == 1:
+                palavra_para_adicionar = input("Qual item adicionar? ").upper()
+                self.verifica_palavra_existente(palavra_para_adicionar)
                 
-            elif not existe: return self.adicionar(fruta)
-                
-        elif acao == 2:
-            self.listar_palavras()
-            print()
-            return self.menu()
+            elif acao == 2:
+                self.imprime_cabecalho_menu()
+                self.listar_palavras()
             
-        elif acao == 0:
-            return 0
-            
-    def listar_palavras(self):
+            elif acao == 0:
+                return 
+
+    def limpa_terminal(self):
         os.system("clear")
-        frutas = [item for item in self.palavra()]
         
-        for item in frutas:
+    def listar_palavras(self):
+        for item in self.lista_de_palavras:
             print(item)
     	    
     def palavra(self):
-        path="palavras/frutas.txt"
-        with open(path, "r") as palavras:
+        with open(self.path, "r") as palavras:
             lista=palavras.read().upper()
-            lista = lista.split() #como alternativa ao .split() podemos usar o . strip()
+            self.lista_de_palavras = lista.split() #como alternativa ao .split() podemos usar o . strip()
             return lista
+            
 
 if __name__ == "__main__":
-
-    menu()
-    
+    Arquivo().menu()

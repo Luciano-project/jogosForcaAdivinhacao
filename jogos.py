@@ -24,10 +24,10 @@ def menu_jogo():
             Arquivo().menu()
             
         elif(jogo == 1):
-            JogoForca.jogar()
+            forca.JogoForca().jogar()
    
         elif(jogo == 2):
-            adivinhacao.jogar()
+            adivinhacao.Adivinhacao().jogar()
 
         else:
             print("Digite uma opção válida!")

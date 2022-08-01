@@ -1,5 +1,5 @@
 from random import randrange
-from forca_palavras import Arquivo
+from forca_palavras import Arquivo, PalavraJogo
 import os
 os.system("clear")
 
@@ -27,8 +27,8 @@ class JogoForca:
         self._letras_acertadas = ["_" for letra in self.palavra_secreta]
     
     def importa_lista_de_palavras(self):
-        self._lista_de_palavras=Arquivo().palavra()
-        
+        self._lista_de_palavras=PalavraJogo().retorna_a_lista()
+
     def define_palavra_secreta(self):
         self._palavra_secreta=self.lista_de_palavras[randrange(len(self.lista_de_palavras))]
 
