@@ -1,11 +1,9 @@
 import os
-path="palavras/"
-for c in os.listdir(path):
-    print(c)
-
+    
+#Desfazer a classe Arquivo e construir uma nova classe para manipulação das palavras
 class Arquivo:
-    def __init__(self):
-        pass
+    def __init__(self,listas=[]):
+        self.listas=listas
     
     def adicionar(self,palavra_a_ser_adicionada):
         path="palavras/frutas.txt"
@@ -13,7 +11,12 @@ class Arquivo:
             palavras.write("{}\n".format(palavra_a_ser_adicionada))
             print("Palavra adicionada com sucesso! ")
             return self.menu()
-
+    
+    def adicionar_listas_forca(self):
+        path="palavras/"
+        for c in os.listdir(path):
+            self.listas.append(c)
+        
     def menu_cabecalho(self):
         pass
         
