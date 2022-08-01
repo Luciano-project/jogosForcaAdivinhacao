@@ -8,12 +8,12 @@ def cabecalho_inicio():
     print("*******Escolha o seu jogo!*******")
     print("*********************************")
 
-def printar_escolhe_jogo():
+def printa_escolhe_jogo():
     print("(1) Forca (2) Adivinhação")
 
 def escolhe_jogo():
     cabecalho_inicio()
-    printar_escolhe_jogo()
+    printa_escolhe_jogo()
     jogo = int(input("Qual jogo? "))
     return jogo
     
@@ -24,7 +24,7 @@ def menu_jogo():
             Arquivo().menu()
             
         elif(jogo == 1):
-            forca.jogar()
+            JogoForca.jogar()
    
         elif(jogo == 2):
             adivinhacao.jogar()
