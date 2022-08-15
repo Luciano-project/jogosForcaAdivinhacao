@@ -4,7 +4,8 @@ import os
 os.system("clear")
 
 class JogoForca:
-    def __init__(self,palavra='',lista=[],letras_acertadas=''):
+    def __init__(self,idioma,palavra='',lista=[],letras_acertadas=''):
+        self.idioma=idioma
         self._palavra_secreta=palavra
         self._lista_de_palavras=lista
         self._letras_acertadas=letras_acertadas
@@ -36,16 +37,16 @@ class JogoForca:
         self.importa_lista_de_palavras()
         self.define_palavra_secreta()
         self.define_letras_acertadas()
-        JogoForca.cabecalho()
+        JogoForca.cabecalho(self.idioma)
         
     @staticmethod
-    def cabecalho():
+    def cabecalho(idioma=''):
         print("*********************************")
-        print("***Bem vindo ao jogo da Forca!***") 
-        print("*********************************")
+        print(f"***{idioma.cabecalho}!***") 
+        print("*********************************\n\n")
 
     def pede_chute(self):
-        chute = input("\n\nQual letra? ")
+        chute = input(f"\n{self.idioma.qual_letra}? ")
         chute = chute.strip().upper()
         return chute
 
@@ -64,12 +65,16 @@ class JogoForca:
     def imprime_letras_acertadas(self):
         #print(self.letras_acertadas)
         for letra in self.letras_acertadas:
-            print(f"'{letra}' ",end='')    
+            print(f"'{letra}' ",end='')   
+        print() 
         
     def jogando(self):
         erros=0
         while(not self.enforcou and not self.acertou):
+            #os.system("clear")
+            #self.verifica_resultado_do_jogo(erros)
             chute = self.pede_chute()
+            #os.system("clear")
             erros+=self.resultado_do_chute(erros,chute)       
             self.verifica_resultado_do_jogo(erros)
             self.imprime_letras_acertadas()
@@ -92,12 +97,12 @@ class JogoForca:
         self.fim_de_jogo(resultado)
     
     def fim_de_jogo(self,resultado):
-        print("\nFim do jogo!")
+        print(f"\n{self.idioma.fim_jogo}!")
         if resultado:
-            JogoForca.imprime_mensagem_vencedor()
+            JogoForca.imprime_mensagem_vencedor(self.idioma)
         
         else:
-            JogoForca.imprime_mensagem_perdedor(self.palavra_secreta)
+            JogoForca.imprime_mensagem_perdedor(self.palavra_secreta,self.idioma)
             
     @staticmethod
     def desenha_forca(erros):
@@ -151,7 +156,7 @@ class JogoForca:
         print()
         
     @staticmethod
-    def imprime_mensagem_perdedor(palavra_secreta):
+    def imprime_mensagem_perdedor(palavra_secreta,idioma):
         print("    _______________         ")
         print("   /               \       ")
         print("  /                 \      ")
@@ -168,12 +173,12 @@ class JogoForca:
         print("   \_             _/       ")
         print("     \_         _/         ")
         print("       \_______/           ")
-        print("Puxa, você foi enforcado!")
-        print("A palavra era {}".format(palavra_secreta))
+        print(f"{idioma.mensagem_enforcado}!")
+        print(f"{idioma.palavra_correta} {palavra_secreta}")
         
     @staticmethod
-    def imprime_mensagem_vencedor():
-        print("Parabéns, você ganhou!")
+    def imprime_mensagem_vencedor(idioma):
+        print(f"{idioma.mensagem_vencedor}!")
         print("       ___________      ")
         print("      '._==_==_=_.'     ")
         print("      .-\\:      /-.    ")

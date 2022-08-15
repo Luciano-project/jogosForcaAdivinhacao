@@ -1,30 +1,31 @@
 from random import randrange
 class Adivinhacao:
-    def __init__(self,chute=0):
+    def __init__(self,idioma,chute=0):
+        self.idioma=idioma
         self.pontos=1000
         self._total_de_tentativas=0
         self._numero_secreto=0
         self.chute=chute
-        
+     
     def imprime_cabecalho(self):
         print("*********************************")
-        print("Bem vindo ao jogo de Adivinhação!")
+        print(f"{self.idioma.cabecalho}!")
         print("*********************************")
 
     def imprime_acertou(self):
-        print("Você acertou e fez {} pontos!".format(self.pontos))
+        print(f"{self.idioma.imprime_acertou[0]} {self.pontos} {self.idioma.imprime_acertou[1]}!")
     
     def imprime_chute_maior(self):
-        print("Você errou! O seu chute foi maior do que o número secreto.")        
+        print(f"{self.idioma.imprime_chute_maior}")        
         
     def imprime_chute_menor(self):
-        print("Você errou! O seu chute foi menor do que o número secreto.")
+        print(f"{self.idioma.imprime_chute_menor}.")
     
     def imprime_numero_de_tentativas(self,rodada):
-        print("Tentativa {} de {}".format(rodada, self.total_de_tentativas))  
+        print(f"\n{self.idioma.imprime_tentativas[0]} {rodada} {self.idioma.imprime_tentativas[1]} {self.total_de_tentativas}")  
     
     def imprime_fim_de_jogo(self):
-        print("Fim de jogo")
+        print(f"{self.idioma.imprime_fim_jogo}")
 
     def define_numero_secreto(self):
         self._numero_secreto = randrange(1,101)
@@ -42,11 +43,11 @@ class Adivinhacao:
         return self._numero_secreto
     
     def imprime_niveis_de_dificuldade(self):
-        print("Qual nível de dificuldade?\n(1) Fácil (2) Médio (3) Difícil")
+        print(f"{self.idioma.imprime_nivel_dificuldade}")
      
     def dificuldade_do_jogo(self):
         self.imprime_niveis_de_dificuldade()
-        nivel = int(input("Defina o nível: "))
+        nivel = int(input(": "))
 
         if(nivel == 1):
             self.total_de_tentativas = 20
@@ -60,14 +61,14 @@ class Adivinhacao:
         self.dificuldade_do_jogo()        
     
     def digita_chute(self):
-        chute_str = input("Digite um número entre 1 e 100: ")
-        print("Você digitou " , chute_str)
+        chute_str = input(f"{self.idioma.digita_chute[0]}: ")
+        print(f"{self.idioma.digita_chute[1]}" , chute_str)
         self.chute = int(chute_str)        
         self.valida_intervalo(self.chute)
         
     def valida_intervalo(self, chute):
         if(chute < 1 or chute > 100):
-            print("Você deve digitar um número entre 1 e 100!")
+            print(f"{self.idioma.valida_intervalo}!")
     
     def atualiza_pontos(self):
         pontos_perdidos = abs(self.numero_secreto - self.chute)

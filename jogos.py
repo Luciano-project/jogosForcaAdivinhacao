@@ -1,38 +1,75 @@
 import forca
 from forca_palavras import Arquivo
 import adivinhacao
+import idiomas_jogo as Idiomas
 
 
-def cabecalho_inicio():
-    print("*********************************")
-    print("*******Escolha o seu jogo!*******")
-    print("*********************************")
+def printar_escolha_idioma():
+    print("(1) Português  (2) English: ")
 
-def printa_escolhe_jogo():
-    print("(1) Forca (2) Adivinhação")
+def define_idioma():
+    printar_escolha_idioma()
+    idioma=int(input(": "))
+    lingua=''
+    if idioma==1:
+        lingua="portugues"
+    elif idioma==2:
+        lingua="ingles"
 
-def escolhe_jogo():
-    cabecalho_inicio()
-    printa_escolhe_jogo()
-    jogo = int(input("Qual jogo? "))
-    return jogo
+    idioma_menujogos=Idiomas.IdiomaMenu(lingua)
+    idioma_forca=Idiomas.IdiomaForca(lingua)
+    idioma_adivinhacao=Idiomas.IdiomaAdivinhacao(lingua)
+    MenuJogos(idioma_menujogos,idioma_forca,idioma_adivinhacao).menu_jogo()
+
+
+class MenuJogos:
+    def __init__(self,menujogos,forca,adivinhacao):
+        self._idioma_menujogos=menujogos
+        self._idioma_forca=forca
+        self._idioma_adivinhacao=adivinhacao
+        
+# Tornamos o acesso indireto ao objeto dos idiomas
+    @property
+    def idioma_menu(self):
+        return self._idioma_menujogos
+    @property
+    def idioma_forca(self):
+        return self._idioma_forca
+    @property
+    def idioma_adivinhacao(self):
+        return self._idioma_adivinhacao
+
     
-def menu_jogo():
-    jogo=escolhe_jogo()
-    while True:
-        if(jogo == 0):
-            Arquivo().menu()
+    def cabecalho_inicio(self):
+        print("*********************************")
+        print(f'*******{self.idioma_menu.cabecalho}!*******')
+        print("*********************************")
+
+    def printa_escolhe_jogo(self):
+        print(f"{self.idioma_menu.jogos}")
+
+    def escolhe_jogo(self):
+        self.cabecalho_inicio()
+        self.printa_escolhe_jogo()
+        jogo = int(input(f"{self.idioma_menu.qual_jogo}: "))
+        return jogo
+    
+    def menu_jogo(self):
+        jogo=self.escolhe_jogo()
+        while True:
+            if(jogo == 0):
+                Arquivo().menu()
             
-        elif(jogo == 1):
-            forca.JogoForca().jogar()
+            elif(jogo == 1):
+                forca.JogoForca(self.idioma_forca).jogar()
    
-        elif(jogo == 2):
-            adivinhacao.Adivinhacao().jogar()
+            elif(jogo == 2):
+                adivinhacao.Adivinhacao(self.idioma_adivinhacao).jogar()
 
-        else:
-            print("Digite uma opção válida!")
+            else:
+                print("INVÁLIDO!")
 
-        break        
+            break
 
 if(__name__ == "__main__"):
-    menu_jogo()
+   define_idioma()
