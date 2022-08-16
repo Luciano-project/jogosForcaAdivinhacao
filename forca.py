@@ -29,7 +29,6 @@ class JogoForca:
         self._letras_acertadas = ["_" for letra in self.palavra_secreta]
 
     def importa_lista_de_palavras(self):
-#        print(self.idioma)
         self._lista_de_palavras=PalavraJogo(self.idioma,self.idioma_jogo).retorna_a_lista()
 
     def define_palavra_secreta(self):
@@ -59,18 +58,18 @@ class JogoForca:
             if(chute == letra):
                 self.letras_acertadas[index] = letra 	
             index = index + 1
-            
+
     def verifica_resultado_do_jogo(self,erros):
         self.enforcou = erros == 7
         self.acertou = "_" not in self.letras_acertadas        
-        
-    
+
+
     def imprime_letras_acertadas(self):
         #print(self.letras_acertadas)
         for letra in self.letras_acertadas:
             print(f"'{letra}' ",end='')   
-        print() 
-        
+        print()
+
     def jogando(self):
         erros=0
         while(not self.enforcou and not self.acertou):
@@ -100,10 +99,9 @@ class JogoForca:
         print(f"\n{self.idioma.fim_jogo}!")
         if resultado:
             JogoForca.imprime_mensagem_vencedor(self.idioma)
-
         else:
             JogoForca.imprime_mensagem_perdedor(self.palavra_secreta,self.idioma)
-            
+
     @staticmethod
     def desenha_forca(erros):
         print("  _______     ")

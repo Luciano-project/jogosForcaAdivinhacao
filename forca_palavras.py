@@ -12,9 +12,7 @@ class PalavraJogo:
         print(f"\n{self.idioma_objeto.escolha_tema}:")
         self.imprime_listas_palavras()
         destino=int(input())
-##
-        print(Arquivo(self.idioma).lista_de_arquivos[destino],self.idioma)
-  ##
+
         self.path+=Arquivo(self.idioma).lista_de_arquivos[destino]
 
         with open(self.path, "r") as palavras:
