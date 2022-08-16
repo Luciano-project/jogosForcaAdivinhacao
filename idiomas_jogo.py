@@ -8,11 +8,6 @@ class IdiomaMenu:
         if self.idioma=="ingles":
             self.idioma_ingles()
 
-    def escolha_do_idioma(self):
-        if self.idioma=="ingles":
-             self.idioma_portugues()
-
-
     def idioma_ingles(self):
         self.cabecalho="CHOOSE YOUR GAME!"
         self.jogos="(1) Hangman  (2) Gessing Number"
@@ -20,28 +15,30 @@ class IdiomaMenu:
 
 
 class IdiomaForca:
-    def __init__(self,idioma):
+    def __init__(self,idioma='portugues'):
         self.idioma=idioma
+        self.escolha_tema='Escolha o tema'
         self.cabecalho='Bem vindo ao jogo da forca'
         self.qual_letra='Qual letra '
         self.fim_jogo='Fim de jogo'
         self.mensagem_enforcado='Puxa, voce foi enforcado'
         self.palavra_correta='A palavra era'
         self.mensagem_vencedor='Parabéns, você ganhou'
+        self.escolha_tema='Escolha um tema'
+        self.imprime_listas_palavras='(0) frutas (1) paises'
 
+        if self.idioma=="ingles": self.idioma_ingles()
 
-def escolha_do_idioma(self):
-        if self.idioma=="ingles":
-             self.idioma_ingles()
-
-def idioma_ingles(self):
+    def idioma_ingles(self):
+        self.escolha_tema='Choose your theme'
         self.cabecalho='Welcome to hangman game'
         self.qual_letra='Which letter '
         self.fim_jogo='End game'
         self.mensagem_enforcado='Gosh, you were hanged'
         self.palavra_correta='The word was '
         self.mensagem_vencedor='Congratulations, you won'
-
+        self.escolha_tema='choose theme'
+        self.imprime_listas_palavras='(0) fruits (1) countries'
 
 
 class IdiomaAdivinhacao:
@@ -57,10 +54,6 @@ class IdiomaAdivinhacao:
         self.digita_chute='Digite um número entre 1 e 100','Você digitou'
         self.valida_intervalo='Você deve digitar um número entre 1 e 100'
         if self.idioma=="ingles":
-            self.escolha_do_idioma()
-
-    def escolha_do_idioma(self):
-        if self.idioma=="ingles":
             self.idioma_ingles()
 
     def idioma_ingles(self):
@@ -73,4 +66,3 @@ class IdiomaAdivinhacao:
         self.imprime_nivel_dificuldade='Which dificult level?\n(1) Easy  (2) Medium  (3) Hard'
         self.digita_chute='Write a number between 1 and 100','You writed'
         self.valida_intervalo='You must write a number between 1 and 100'
-        

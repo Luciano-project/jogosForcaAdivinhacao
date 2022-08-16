@@ -19,15 +19,14 @@ def define_idioma():
     idioma_menujogos=Idiomas.IdiomaMenu(lingua)
     idioma_forca=Idiomas.IdiomaForca(lingua)
     idioma_adivinhacao=Idiomas.IdiomaAdivinhacao(lingua)
-    MenuJogos(idioma_menujogos,idioma_forca,idioma_adivinhacao).menu_jogo()
-
+    MenuJogos(idioma_menujogos,idioma_forca,idioma_adivinhacao,lingua).menu_jogo()
 
 class MenuJogos:
-    def __init__(self,menujogos,forca,adivinhacao):
+    def __init__(self,menujogos,forca,adivinhacao,lingua):
         self._idioma_menujogos=menujogos
         self._idioma_forca=forca
         self._idioma_adivinhacao=adivinhacao
-        
+        self.lingua=lingua
 # Tornamos o acesso indireto ao objeto dos idiomas
     @property
     def idioma_menu(self):
@@ -61,14 +60,12 @@ class MenuJogos:
                 Arquivo().menu()
             
             elif(jogo == 1):
-                forca.JogoForca(self.idioma_forca).jogar()
-   
+                forca.JogoForca(self.idioma_forca,self.lingua).jogar()
             elif(jogo == 2):
                 adivinhacao.Adivinhacao(self.idioma_adivinhacao).jogar()
 
             else:
                 print("INVÁLIDO!")
-
             break
 
 if(__name__ == "__main__"):
