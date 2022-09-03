@@ -1,4 +1,3 @@
-
 class IdiomaMenu:
     def __init__(self,idioma):
         self.idioma=idioma
@@ -46,6 +45,7 @@ class IdiomaAdivinhacao:
         self.idioma=idioma
         self.cabecalho='Bem vindo ao jogo de Adivinhação'
         self.imprime_acertou='Você acertou e fez','pontos'
+        self.imprime_perdeu='Poxa, você perdeu! O número secreto era: '
         self.imprime_chute_maior='Você errou! O seu chute foi maior do que o número secreto'
         self.imprime_chute_menor='Você errou! O seu chute foi menor do que o número secreto'
         self.imprime_tentativas='Tentativa','de'
@@ -53,16 +53,21 @@ class IdiomaAdivinhacao:
         self.imprime_nivel_dificuldade='Qual nível de dificuldade?\n(1) Fácil (2) Médio (3) Difícil'
         self.digita_chute='Digite um número entre 1 e 100','Você digitou'
         self.valida_intervalo='Você deve digitar um número entre 1 e 100'
+        self.dificuldade=['Fácil','Médio','Difícil']
+        self.tentativas_anteriores = 'Tentativas anteriores'
         if self.idioma=="ingles":
             self.idioma_ingles()
 
     def idioma_ingles(self):
         self.cabecalho='Welcome to guessing game'
-        self.imprime_acertou='You got it right and made','points'
+        self.imprime_acertou='You got it right and did','points'
+        self.imprime_perdeu='Gosh, you lose! The secret number was: '
         self.imprime_chute_maior='Your attempt was higher than the secret number'
         self.imprime_chute_menor='Your attempt was lower than the secret number'
         self.imprime_tentativas='Try', 'of'
-        self.imprime_fim_jogo='Congratulations, you won'
+        self.imprime_fim_jogo='End game'
         self.imprime_nivel_dificuldade='Which dificult level?\n(1) Easy  (2) Medium  (3) Hard'
         self.digita_chute='Write a number between 1 and 100','You writed'
         self.valida_intervalo='You must write a number between 1 and 100'
+        self.dificuldade=['Easy','Medium','Hard']
+        self.tentativas_anteriores = 'last attempts'
