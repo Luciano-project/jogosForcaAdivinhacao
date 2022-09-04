@@ -5,4 +5,4 @@ Este projeto foi construindo utilizando estruturas primitivas e estruturas de da
 
 Possibilidade de iniciar o jogo em inglês e em português, também sendo possível entrar configurando as palavras existentes nos arquivos/temas (arquivos de extenção .txt) do jogo.
 
-O jogo roda em python3 no terminal apartir do arquivo jogos.py (módulo define_idioma()).
+O jogo roda em python3 no terminal apartir do arquivo jogos.py.
