@@ -1,8 +1,5 @@
 from random import randrange
 from forca_palavras import Arquivo, PalavraJogo
-import os
-os.system("clear")
-
 class JogoForca:
     def __init__(self,idioma_objeto,idioma_jogo,palavra='',lista=[],letras_acertadas=''):
         self.idioma=idioma_objeto
@@ -12,7 +9,12 @@ class JogoForca:
         self._letras_acertadas=letras_acertadas
         self.acertou=False
         self.enforcou=False
-
+        self.historico_tentativas=[]
+        
+    def limpar_terminal(self):
+        from os import system
+        system('clear')
+        
     @property
     def letras_acertadas(self):
         return self._letras_acertadas
@@ -36,20 +38,20 @@ class JogoForca:
 
     def carrega_dados_do_jogo(self):
         self.importa_lista_de_palavras()
+        self.cabecalho()
         self.define_palavra_secreta()
         self.define_letras_acertadas()
-        JogoForca.cabecalho(self.idioma)
 
-
-    @staticmethod
-    def cabecalho(idioma=''):
+    def cabecalho(self):
+        self.limpar_terminal()
         print("*********************************")
-        print(f"***{idioma.cabecalho}!***") 
+        print(f"***{self.idioma.cabecalho}!***") 
         print("*********************************\n\n")
 
     def pede_chute(self):
         chute = input(f"\n{self.idioma.qual_letra}? ")
         chute = chute.strip().upper()
+        self.adiciona_historico_tentativas(chute)
         return chute
 
     def marca_chute_correto(self,chute):
@@ -69,14 +71,33 @@ class JogoForca:
         for letra in self.letras_acertadas:
             print(f"'{letra}' ",end='')   
         print()
+    
+    def adiciona_historico_tentativas(self,chute):
+        if chute not in self.historico_tentativas:
+            self.historico_tentativas.append(chute)
+        
+    
+    def imprime_historico_tentativas(self):
+        print(f"{self.idioma.imprime_historico_tentativas}:", end=' ')
+        for item in self.historico_tentativas:
+            print(f"'{item}'",end=', ')
+        print()
+
+    def imprime_info_jogando(self,erros):
+        self.cabecalho()
+        JogoForca.desenha_forca(erros)
+        self.imprime_historico_tentativas()
+        self.imprime_letras_acertadas()        
 
     def jogando(self):
         erros=0
         while(not self.enforcou and not self.acertou):
             chute = self.pede_chute()
+            
             erros+=self.resultado_do_chute(erros,chute)
+            
             self.verifica_resultado_do_jogo(erros)
-            self.imprime_letras_acertadas()
+            self.imprime_info_jogando(erros)
         return self.acertou
 
     def resultado_do_chute(self,erros,chute):
@@ -86,7 +107,6 @@ class JogoForca:
 
         else:
             erros+=1
-            JogoForca.desenha_forca(erros)
             return 1
 
     def jogar(self):

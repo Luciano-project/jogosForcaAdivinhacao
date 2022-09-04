@@ -52,8 +52,6 @@ class Adivinhacao:
     def imprime_fim_de_jogo(self):
         print(f"{self.idioma.imprime_fim_jogo}!")
 
-
-
     def define_numero_secreto(self):
         self._numero_secreto = randrange(1,101)
         
@@ -104,8 +102,7 @@ class Adivinhacao:
             return True
         else:
             self.adiciona_historico_chutes()
-            
-    
+             
     def atualiza_pontos(self):
         pontos_perdidos = abs(self.numero_secreto - self.chute)
         self.pontos = self.pontos - pontos_perdidos

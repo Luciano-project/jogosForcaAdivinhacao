@@ -25,6 +25,7 @@ class IdiomaForca:
         self.mensagem_vencedor='Parabéns, você ganhou'
         self.escolha_tema='Escolha um tema'
         self.imprime_listas_palavras='(0) frutas (1) paises'
+        self.imprime_historico_tentativas='Tentativas anteriores'
 
         if self.idioma=="ingles": self.idioma_ingles()
 
@@ -38,6 +39,7 @@ class IdiomaForca:
         self.mensagem_vencedor='Congratulations, you won'
         self.escolha_tema='choose theme'
         self.imprime_listas_palavras='(0) fruits (1) countries'
+        self.imprime_historico_tentativas='Previous attemps'
 
 
 class IdiomaAdivinhacao:

@@ -38,8 +38,12 @@ class MenuJogos:
     def idioma_adivinhacao(self):
         return self._idioma_adivinhacao
 
-    
+    def limpar_terminal(self):
+        from os import system
+        system('clear')
+        
     def cabecalho_inicio(self):
+        self.limpar_terminal()
         print("*********************************")
         print(f'*******{self.idioma_menu.cabecalho}!*******')
         print("*********************************")

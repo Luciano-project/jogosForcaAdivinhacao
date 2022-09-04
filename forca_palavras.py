@@ -1,4 +1,3 @@
-import os
 import idiomas_jogo as Idioma
 
 class PalavraJogo:
@@ -21,7 +20,6 @@ class PalavraJogo:
             return lista_de_palavras
 
     def imprime_listas_palavras(self):
-        os.system("clear")
 #        print(self.idioma)
         print(f'{self.idioma_objeto.imprime_listas_palavras}')
 
